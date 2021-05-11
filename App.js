@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import styled from "styled-components";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const Header = styled.Text`
   position: absolute;
@@ -16,10 +17,17 @@ const Header = styled.Text`
   background-color: #00d54b;
 `;
 
+const AddButton = styled.View`
+  top: 103px;
+`;
+
 export default function App() {
   return (
     <View>
       <Header>FINPAL</Header>
+      <AddButton>
+        <Icon name="plus-circle" size={50} color="#00d54b" />
+      </AddButton>
     </View>
   );
 }
