@@ -1,11 +1,11 @@
-import { getStylesForProperty } from "css-to-react-native";
-import React, { Component } from "react";
-import { StyleSheet, Dimensions, StatusBar } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import React from "react";
+import { StyleSheet, Dimensions, StatusBar, Platform } from "react-native";
 import { Header } from "react-native/Libraries/NewAppScreen";
 
 const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
+const toolbarHeight = Platform.OS === "ios" ? 64 : 56;
+const headerHeight = Header.height;
+const height = Dimensions.get("window").height - toolbarHeight;
 const AddButtonPosX = width / 2 - 30 + 0.5;
 const AddButtonPosY = height * 0.7;
 
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 60,
     textAlign: "center",
     fontWeight: "bold",
-    top: height * 0.075,
+    top: height * 0.1 - 22.5,
   },
   AddTip: {
     position: "absolute",

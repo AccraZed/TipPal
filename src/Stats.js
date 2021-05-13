@@ -10,6 +10,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./Style";
 import { Picker } from "@react-native-picker/picker";
+import { useHeaderHeight } from "@react-navigation/stack";
 
 const StatScreen = ({ navigation }) => {
   let state = {
