@@ -9,7 +9,7 @@ const SettingsButton = () => {
   const navigation = useNavigation();
   return (
     <TouchableHighlight
-      style={{ borderRadius: 30, overflow: "hidden" }}
+      style={{ borderRadius: 30, overflow: "hidden", right: 10 }}
       onPress={() => navigation.navigate("Settings")}
     >
       <View style={styles.SettingsButton}>
