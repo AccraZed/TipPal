@@ -1,5 +1,5 @@
-import 'react-native-gesture-handler';
-import React from 'react';
+import "react-native-gesture-handler";
+import React from "react";
 import {
     StyleSheet,
     Text,
@@ -10,28 +10,28 @@ import {
     Button,
     Platform,
     TouchableHighlight,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { DefaultTheme, NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import styles from './Style';
-import StatScreen from './Stats';
-import NumberPad from './NumberPad';
-import { Picker } from '@react-native-picker/picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { render } from 'react-dom';
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import {
+    DefaultTheme,
+    NavigationContainer,
+    useNavigation,
+} from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import styles from "./Style";
+import StatScreen from "./Stats";
+import NumberPad from "./NumberPad";
+import { Picker } from "@react-native-picker/picker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { render } from "react-dom";
 
 class AddTipScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            amount: '',
-            hasDecimal: false,
-            decimalPlaces: 0,
+            amount: "",
         };
         this.updateAmount = this.updateAmount.bind(this);
-        this.updateHasDecimal = this.updateHasDecimal.bind(this);
-        this.updateDecimalPlaces = this.updateDecimalPlaces.bind(this);
     }
 
     updateAmount(amount) {
@@ -40,34 +40,18 @@ class AddTipScreen extends React.Component {
         });
     }
 
-    updateHasDecimal(hasDecimal) {
-        this.setState({
-            hasDecimal: hasDecimal,
-        });
-    }
-
-    updateDecimalPlaces(decimalPlaces) {
-        this.setState({
-            decimalPlaces: decimalPlaces,
-        });
-    }
-
     render() {
         return (
             <SafeAreaView>
                 <NumberPad
                     amount={this.state.amount}
-                    hasDecimal={this.state.hasDecimal}
-                    decimalPlaces={this.state.decimalPlaces}
                     updateAmount={this.updateAmount}
-                    updateHasDecimal={this.updateHasDecimal}
-                    updateDecimalPlaces={this.updateDecimalPlaces}
                 />
                 <View style={styles.AddTipButtonContainer}>
                     <Button
                         color="#00d54b"
                         title="Add Tip"
-                        onPress={() => this.props.navigation.navigate('Stats')}
+                        onPress={() => this.props.navigation.navigate("Stats")}
                     />
                 </View>
             </SafeAreaView>

@@ -1,6 +1,6 @@
-import 'react-native-gesture-handler';
-import React from 'react';
-import { useState, useRef, Component } from 'react';
+import "react-native-gesture-handler";
+import React from "react";
+import { useState, useRef, Component } from "react";
 import {
     StyleSheet,
     Text,
@@ -11,75 +11,71 @@ import {
     Platform,
     Button,
     TouchableHighlight,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import styles from './Style';
-import { Picker } from '@react-native-picker/picker';
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import styles from "./Style";
+import { Picker } from "@react-native-picker/picker";
 
 class NumberPad extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            hasDecimal: false,
+            decimalPlaces: 0,
+        };
     }
 
-    keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0'];
+    keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
 
     onPressNum = (key) => {
         if (this.props.amount.length >= 8) return;
-        if (this.props.amount === '') {
-            if (key === '.') this.props.updateHasDecimal(true);
-            if (key !== '0') this.props.updateAmount(key);
-        } else if (key === '.') {
-            if (!this.props.hasDecimal) {
-                // this.props.setState({
-                //     amount: this.props.amount + key,
-                //     hasDecimal: true,
-                // });
+        if (this.props.amount === "") {
+            this.setState({ hasDecimal: false, decimalPlaces: 0 });
+            if (key === ".") this.setState({ hasDecimal: true });
+            if (key !== "0") this.props.updateAmount(key);
+        } else if (key === ".") {
+            if (!this.state.hasDecimal) {
                 this.props.updateAmount(this.props.amount + key);
-                this.props.updateHasDecimal(true);
+                this.setState({ hasDecimal: true });
             }
         } else {
-            if (this.props.hasDecimal) {
-                if (this.props.decimalPlaces < 2) {
-                    // this.props.setState({
-                    //     amount: this.props.amount + key,
-                    //     decimalPlaces: this.props.decimalPlaces + 1,
-                    // });
+            if (this.state.hasDecimal) {
+                if (this.state.decimalPlaces < 2) {
                     this.props.updateAmount(this.props.amount + key);
-                    this.props.updateDecimalPlaces(this.props.decimalPlaces + 1);
+                    this.setState({
+                        decimalPlaces: this.state.decimalPlaces + 1,
+                    });
                 }
             } else {
                 this.props.updateAmount(this.props.amount + key);
-                // this.props.setState({ amount: this.props.amount + key });
             }
         }
     };
 
     delLast = () => {
-        if (this.props.amount.charAt(this.props.amount.length - 1) === '.') {
-            // this.props.setState({ hasDecimal: false });
-            this.props.updateHasDecimal(false);
-        } else if (this.props.hasDecimal) {
-            // this.props.setState({
-            //     decimalPlaces: this.props.decimalPlaces - 1,
-            // });
-            this.props.updateDecimalPlaces(this.props.decimalPlaces - 1);
+        if (this.props.amount.charAt(this.props.amount.length - 1) === ".") {
+            this.setState({ hasDecimal: false });
+        } else if (this.state.hasDecimal) {
+            this.setState({ decimalPlaces: this.state.decimalPlaces - 1 });
         }
-        // this.props.setState({ amount: this.props.amount.slice(0, -1) });
         this.props.updateAmount(this.props.amount.slice(0, -1));
     };
 
     render() {
-        let textAmount = this.props.amount == '' ? 0 : this.props.amount;
+        let textAmount = this.props.amount == "" ? 0 : this.props.amount;
 
-        if (this.props.amount.charAt(0) == '.') {
-            textAmount = '0' + this.props.amount;
+        if (this.props.amount.charAt(0) == ".") {
+            textAmount = "0" + this.props.amount;
         }
+
         return (
             <SafeAreaView>
                 <View style={styles.NumberpadAmountContainer}>
-                    <Text style={styles.NumberpadAmountText}>${textAmount}</Text>
+                    <Text style={styles.NumberpadAmountText}>
+                        ${textAmount}
+                    </Text>
                 </View>
                 <View style={styles.NumberPadContainer}>
                     {this.keys.map((num) => {
@@ -88,17 +84,22 @@ class NumberPad extends React.Component {
                                 key={num}
                                 style={{
                                     borderRadius: 50,
-                                    backgroundColor: '#f3f3f3',
+                                    backgroundColor: "#f3f3f3",
                                 }}
                                 onPress={() => this.onPressNum(num)}
                             >
                                 <View style={styles.NumberpadKeyContainer}>
-                                    <Text style={styles.NumberpadKeyText}>{num}</Text>
+                                    <Text style={styles.NumberpadKeyText}>
+                                        {num}
+                                    </Text>
                                 </View>
                             </TouchableHighlight>
                         );
                     })}
-                    <TouchableHighlight onPress={this.delLast} style={{ borderRadius: 50 }}>
+                    <TouchableHighlight
+                        onPress={this.delLast}
+                        style={{ borderRadius: 50 }}
+                    >
                         <View style={styles.NumberpadKeyContainer}>
                             <Icon
                                 name="backspace"
