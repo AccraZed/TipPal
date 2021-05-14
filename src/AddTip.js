@@ -38,10 +38,11 @@ class AddTipScreen extends React.Component {
 
     render() {
         return (
-            <SafeAreaView>
+            <SafeAreaView style={{ flexDirection: "row", flexWrap: "wrap" }}>
                 <NumberPad props={{ amount: this.amount }} />
-                <View style={styles.AddTip}>
+                <View style={styles.AddTipContainer}>
                     <Button
+                        style={styles.AddTip}
                         title="Add Tip"
                         onPress={() => this.props.navigation.navigate("Stats")}
                     />
