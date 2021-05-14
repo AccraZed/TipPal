@@ -31,14 +31,14 @@ class AddTipScreen extends React.Component {
         this.state = {
             amount: "",
         };
-        this.updateAmount = this.updateAmount.bind(this);
+        // this.updateAmount = this.updateAmount.bind(this);
     }
 
-    updateAmount(amount) {
+    updateAmount = (amount) => {
         this.setState({
             amount: amount,
         });
-    }
+    };
 
     render() {
         return (
