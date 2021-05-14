@@ -32,8 +32,7 @@ class NumberPad extends React.Component {
     onPressNum = (key) => {
         if (this.props.amount.length >= 8) return;
         if (this.props.amount === "") {
-            this.setState({ hasDecimal: false, decimalPlaces: 0 });
-            if (key === ".") this.setState({ hasDecimal: true });
+            this.setState({ decimalPlaces: 0, hasDecimal: key === "." });
             if (key !== "0") this.props.updateAmount(key);
         } else if (key === ".") {
             if (!this.state.hasDecimal) {
