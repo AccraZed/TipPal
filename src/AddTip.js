@@ -34,12 +34,40 @@ class AddTipScreen extends React.Component {
             hasDecimal: false,
             decimalPlaces: 0,
         };
+        this.updateAmount = this.updateAmount.bind(this);
+        this.updateHasDecimal = this.updateHasDecimal.bind(this);
+        this.updateDecimalPlaces = this.updateDecimalPlaces.bind(this);
+    }
+
+    updateAmount(amount) {
+        this.setState({
+            amount: amount,
+        });
+    }
+
+    updateHasDecimal(hasDecimal) {
+        this.setState({
+            hasDecimal: hasDecimal,
+        });
+    }
+
+    updateDecimalPlaces(decimalPlaces) {
+        this.setState({
+            decimalPlaces: decimalPlaces,
+        });
     }
 
     render() {
         return (
             <SafeAreaView style={{ flexDirection: "row", flexWrap: "wrap" }}>
-                <NumberPad props={{ amount: this.amount }} />
+                <NumberPad
+                    amount={this.state.amount}
+                    hasDecimal={this.state.hasDecimal}
+                    decimalPlaces={this.state.decimalPlaces}
+                    updateAmount={this.updateAmount}
+                    updateHasDecimal={this.updateHasDecimal}
+                    updateDecimalPlaces={this.updateDecimalPlaces}
+                />
                 <View style={styles.AddTipContainer}>
                     <Button
                         style={styles.AddTip}

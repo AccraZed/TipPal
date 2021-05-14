@@ -28,49 +28,55 @@ class NumberPad extends React.Component {
     onPressNum = (key) => {
         if (this.props.amount.length >= 8) return;
         if (this.props.amount === "") {
-            if (key === ".") this.props.setState({ hasDecimal: true });
-            if (key !== "0") this.props.setState({ amount: key });
+            if (key === ".") this.props.updateHasDecimal(true);
+            if (key !== "0") this.props.updateAmount(key);
         } else if (key === ".") {
-            if (!this.props.state.hasDecimal) {
-                this.props.setState({
-                    amount: this.props.state.amount + key,
-                    hasDecimal: true,
-                });
+            if (!this.props.hasDecimal) {
+                // this.props.setState({
+                //     amount: this.props.amount + key,
+                //     hasDecimal: true,
+                // });
+                this.props.updateAmount(this.props.amount + key);
+                this.props.updateHasDecimal(true);
             }
         } else {
-            if (this.props.state.hasDecimal) {
-                if (this.props.state.decimalPlaces < 2) {
-                    this.props.setState({
-                        amount: this.props.state.amount + key,
-                        decimalPlaces: this.props.state.decimalPlaces + 1,
-                    });
+            if (this.props.hasDecimal) {
+                if (this.props.decimalPlaces < 2) {
+                    // this.props.setState({
+                    //     amount: this.props.amount + key,
+                    //     decimalPlaces: this.props.decimalPlaces + 1,
+                    // });
+                    this.props.updateAmount(this.props.amount + key);
+                    this.props.updateDecimalPlaces(
+                        this.props.decimalPlaces + 1
+                    );
                 }
             } else {
-                this.props.setState({ amount: this.props.state.amount + key });
+                this.props.updateAmount(this.props.amount + key);
+                // this.props.setState({ amount: this.props.amount + key });
             }
         }
     };
 
     delLast = () => {
-        if (
-            this.props.state.amount.charAt(
-                this.props.state.amount.length - 1
-            ) === "."
-        )
-            this.props.setState({ hasDecimal: false });
-        else if (this.props.state.hasDecimal)
-            this.props.setState({
-                decimalPlaces: this.props.state.decimalPlaces - 1,
-            });
-        this.props.setState({ amount: this.props.state.amount.slice(0, -1) });
+        if (this.props.amount.charAt(this.props.amount.length - 1) === ".") {
+            // this.props.setState({ hasDecimal: false });
+            this.props.updateHasDecimal(false);
+        } else if (this.props.hasDecimal) {
+            // this.props.setState({
+            //     decimalPlaces: this.props.decimalPlaces - 1,
+            // });
+            this.props.updateDecimalPlaces(this.props.decimalPlaces - 1);
+        }
+        // this.props.setState({ amount: this.props.amount.slice(0, -1) });
+        this.props.updateAmount(this.props.amount.slice(0, -1));
     };
 
     render() {
-        let textAmount =
-            this.props.state.amount == "" ? 0 : this.props.state.amount;
+        let textAmount = this.props.amount == "" ? 0 : this.props.amount;
 
-        if (this.props.state.amount.charAt(0) == ".") {
-            textAmount = "0" + this.props.state.amount;
+        if (this.props.amount.charAt(0) == ".") {
+            textAmount = "0" + this.props.amount;
         }
         return (
             <SafeAreaView>
