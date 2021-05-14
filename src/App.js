@@ -32,6 +32,7 @@ const MyStack = () => {
             <Stack.Navigator>
                 <Stack.Screen
                     name="Stats"
+                    style={styles.Container}
                     component={StatScreen}
                     options={({ navigation }) => ({
                         headerStyle: styles.Header,
@@ -41,6 +42,7 @@ const MyStack = () => {
                 />
                 <Stack.Screen
                     name="AddTip"
+                    style={styles.Container}
                     component={AddTipScreen}
                     options={({ navigation }) => ({
                         headerStyle: styles.Header,
@@ -51,6 +53,7 @@ const MyStack = () => {
                 />
                 <Stack.Screen
                     name="Settings"
+                    style={styles.Container}
                     component={SettingsScreen}
                     options={{
                         headerStyle: styles.Header,
