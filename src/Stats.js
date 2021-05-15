@@ -13,14 +13,14 @@ import styles from './Style';
 import { Picker } from '@react-native-picker/picker';
 import { useHeaderHeight } from '@react-navigation/stack';
 
-const StatScreen = ({ navigation }) => {
-    const headerHeight = useHeaderHeight();
+const StatScreen = ({ route, navigation }) => {
     let state = {
         timeframe: 'day',
         stat: 'average',
+        data: [],
     };
 
-    console.log(headerHeight + ' ' + StatusBar.currentHeight);
+    const db = route.params;
 
     let picker;
 
@@ -69,6 +69,10 @@ const StatScreen = ({ navigation }) => {
                     onPress={() => navigation.navigate('AddTip')}
                 />
             </View>
+            <Button
+                title="TRANSACTIONS"
+                onPress={() => navigation.navigate('Transactions')}
+            ></Button>
         </SafeAreaView>
     );
 };

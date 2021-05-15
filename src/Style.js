@@ -11,8 +11,8 @@ const AddButtonPosY = height * 0.7;
 
 const styles = StyleSheet.create({
     Container: {
-        height: height,
-        width: width,
+        height: '100%',
+        width: '100%',
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'nowrap',
@@ -29,27 +29,27 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
     },
     StatsContainer: {
-        height: height,
-        width: width,
+        height: '100%',
+        width: '100%',
     },
     StatsPickerContainer: {
         flexDirection: 'row',
         flexWrap: 'nowrap',
     },
     StatsPickerItem: {
-        width: width / 2,
+        width: '50%',
         height: 40,
     },
     StatsGraphContainer: {
-        height: height * 0.5,
+        height: '50%',
     },
     StatsAddButtonContainer: {
         position: 'absolute',
-        width: width,
-        bottom: height * 0.05,
+        width: '100%',
+        bottom: '5%',
     },
     SettingsButton: {
-        marginRight: width * 0.02,
+        marginRight: '2%',
         borderRadius: 20,
         backgroundColor: '#00d54b',
         width: 40,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     AddTipButtonContainer: {
         justifyContent: 'center',
-        height: height * 0.2,
+        height: '20%',
         width: width,
     },
     NumberPadContainer: {
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     NumberpadKeyContainer: {
         width: width / 3,
-        height: height * 0.14,
+        height: width * 0.2,
         justifyContent: 'center',
         backgroundColor: '#f3f2f3',
     },
@@ -92,6 +92,10 @@ const styles = StyleSheet.create({
         fontSize: 30,
         textAlign: 'center',
     },
+    TransactionsContainer: {},
+    TransactionsItem: { width: '100%' },
+    TransactionsItemAmount: { alignSelf: 'flex-start' },
+    TransactionsItemTimestamp: { alignSelf: 'flex-end' },
 });
 
 export default styles;

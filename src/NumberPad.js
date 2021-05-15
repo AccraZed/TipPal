@@ -1,22 +1,8 @@
-import "react-native-gesture-handler";
-import React from "react";
-import { useState, useRef, Component } from "react";
-import {
-    StyleSheet,
-    Text,
-    View,
-    SafeAreaView,
-    Dimensions,
-    StatusBar,
-    Platform,
-    Button,
-    TouchableHighlight,
-} from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import styles from "./Style";
-import { Picker } from "@react-native-picker/picker";
+import 'react-native-gesture-handler';
+import React from 'react';
+import { Text, View, SafeAreaView, TouchableHighlight } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import styles from './Style';
 
 class NumberPad extends React.Component {
     constructor(props) {
@@ -27,14 +13,14 @@ class NumberPad extends React.Component {
         };
     }
 
-    keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
+    keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0'];
 
     onPressNum = (key) => {
         if (this.props.amount.length >= 8) return;
-        if (this.props.amount === "") {
-            this.setState({ decimalPlaces: 0, hasDecimal: key === "." });
-            if (key !== "0") this.props.updateAmount(key);
-        } else if (key === ".") {
+        if (this.props.amount === '') {
+            this.setState({ decimalPlaces: 0, hasDecimal: key === '.' });
+            if (key !== '0') this.props.updateAmount(key);
+        } else if (key === '.') {
             if (!this.state.hasDecimal) {
                 this.props.updateAmount(this.props.amount + key);
                 this.setState({ hasDecimal: true });
@@ -54,7 +40,7 @@ class NumberPad extends React.Component {
     };
 
     delLast = () => {
-        if (this.props.amount.charAt(this.props.amount.length - 1) === ".") {
+        if (this.props.amount.charAt(this.props.amount.length - 1) === '.') {
             this.setState({ hasDecimal: false });
         } else if (this.state.hasDecimal) {
             this.setState({ decimalPlaces: this.state.decimalPlaces - 1 });
@@ -63,18 +49,16 @@ class NumberPad extends React.Component {
     };
 
     render() {
-        let textAmount = this.props.amount == "" ? 0 : this.props.amount;
+        let textAmount = this.props.amount == '' ? 0 : this.props.amount;
 
-        if (this.props.amount.charAt(0) == ".") {
-            textAmount = "0" + this.props.amount;
+        if (this.props.amount.charAt(0) == '.') {
+            textAmount = '0' + this.props.amount;
         }
 
         return (
             <SafeAreaView>
                 <View style={styles.NumberpadAmountContainer}>
-                    <Text style={styles.NumberpadAmountText}>
-                        ${textAmount}
-                    </Text>
+                    <Text style={styles.NumberpadAmountText}>${textAmount}</Text>
                 </View>
                 <View style={styles.NumberPadContainer}>
                     {this.keys.map((num) => {
@@ -83,22 +67,17 @@ class NumberPad extends React.Component {
                                 key={num}
                                 style={{
                                     borderRadius: 50,
-                                    backgroundColor: "#f3f3f3",
+                                    backgroundColor: '#f3f3f3',
                                 }}
                                 onPress={() => this.onPressNum(num)}
                             >
                                 <View style={styles.NumberpadKeyContainer}>
-                                    <Text style={styles.NumberpadKeyText}>
-                                        {num}
-                                    </Text>
+                                    <Text style={styles.NumberpadKeyText}>{num}</Text>
                                 </View>
                             </TouchableHighlight>
                         );
                     })}
-                    <TouchableHighlight
-                        onPress={this.delLast}
-                        style={{ borderRadius: 50 }}
-                    >
+                    <TouchableHighlight onPress={this.delLast} style={{ borderRadius: 50 }}>
                         <View style={styles.NumberpadKeyContainer}>
                             <Icon
                                 name="backspace"
